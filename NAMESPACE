@@ -3,3 +3,4 @@
 export(distinct_excl)
 export(plot_missing)
 export(snake_lower)
+export(sql_group_count)
