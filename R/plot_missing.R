@@ -12,8 +12,7 @@
 plot_missing <- function(df){
 missing_percent <- df %>%
     dplyr::summarise_all(funs(sum(is.na(.))/n())) %>%
-    gather(key="feature", value="missing_pct") %>%
-    filter(missing_pct>0)
+    gather(key="feature", value="missing_pct")
 
 missing_percent %>%
     ggplot2::ggplot(aes(x=reorder(feature,-missing_pct),y=missing_pct)) +

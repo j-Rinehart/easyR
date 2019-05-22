@@ -7,6 +7,8 @@
 distinct_excl(.data, excl_list, ...)
 }
 \arguments{
+\item{excl_list}{character vector of names to be excluded from distinct calcs}
+
 \item{data}{Data frame to be used (can be piped)}
 }
 \value{
