@@ -17,5 +17,5 @@ sql_group_count <- function(group_var, table_name){
   rs = mmkit::db_conn('redshift')
 
   rs$query(query) %>%
-    dplyr::arrange(group_var)
+    dplyr::arrange_(var)
 }
