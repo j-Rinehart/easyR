@@ -1,6 +1,7 @@
 #' Uses the `sql_insert` function from `mmkit`, but cuts up inserting into batch sizes
 #' when table is too large for efficient insert.
 #'
+#' @import easyR
 #' @param df_name name of data frame to insert
 #' @param table_name Redshift table name (with schema if required)
 #' @param batch_size Batch size for inserts (size of subset chunks)
@@ -17,6 +18,9 @@ sql_insert_big <- function(df_name, table_name, batch_size){
       cut2 = batch_size
       df<- df_name[cut1:cut2,]
       message(sprintf("@@@@@---Splitting data and uploading chunk #%s", i))
+      message("@@@@@---Setting column lengths to max size of full data set.")
+      df<-easyR::set_max_col(full_df = df_name, samp_df = df)
+      message("@@@@@---Done. Begining first upload")
       sql_insert(data=df, table_name=table_name,
                  conn = rs,
                  redefine = FALSE,
@@ -48,8 +52,6 @@ sql_insert_big <- function(df_name, table_name, batch_size){
       }
     }
   }
-
-
 
 
 
