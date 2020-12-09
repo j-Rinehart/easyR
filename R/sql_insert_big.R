@@ -1,7 +1,6 @@
 #' Uses the `sql_insert` function from `mmkit`, but cuts up inserting into batch sizes
 #' when table is too large for efficient insert.
 #'
-#' @import easyR
 #' @param df_name name of data frame to insert
 #' @param table_name Redshift table name (with schema if required)
 #' @param batch_size Batch size for inserts (size of subset chunks)
