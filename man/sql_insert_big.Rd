@@ -5,7 +5,13 @@
 \title{Uses the `sql_insert` function from `mmkit`, but cuts up inserting into batch sizes
 when table is too large for efficient insert.}
 \usage{
-sql_insert_big(df_name, table_name, batch_size)
+sql_insert_big(
+  df_name,
+  table_name,
+  batch_size,
+  delete_phantom = FALSE,
+  phantom_null_field = "insert_date"
+)
 }
 \arguments{
 \item{df_name}{name of data frame to insert}

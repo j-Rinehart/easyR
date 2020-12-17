@@ -8,7 +8,11 @@
 #' @export
 ######################################################################################
 
-sql_insert_big <- function(df_name, table_name, batch_size){
+sql_insert_big <- function(df_name,
+                           table_name,
+                           batch_size,
+                           delete_phantom = FALSE,
+                           phantom_null_field = "insert_date"){
   num_iter = ceiling(nrow(df_name)/batch_size)
   message(sprintf("Data has %s rows.  Will be split into %s chunks and uploaded", nrow(df_name), num_iter))
   for(i in 1:num_iter) {
@@ -49,7 +53,12 @@ sql_insert_big <- function(df_name, table_name, batch_size){
                    perms='',
                    bucket = "clc-s3a")
       }
-    }
+  }
+  if(delete_phantom==TRUE){
+  message("DELETING PHANTOM ROW")
+  query <- paste0("DELETE FROM ", table_name, " WHERE ", phantom_null_field," IS NULL")
+  rs$send(query)
+  }
   }
 
 
