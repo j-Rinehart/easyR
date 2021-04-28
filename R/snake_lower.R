@@ -11,7 +11,8 @@ snake_lower <- function(df){
   names(df) <- tolower(gsub("\\(", "", names(df)))
   names(df) <- tolower(gsub(")", "", names(df)))
   names(df) <- tolower(gsub("\"", "", names(df)))
-  names(df) <- tolower(gsub("/", "", names(df)))
+  names(df) <- tolower(gsub("/", "_", names(df)))
+  names(df) <- tolower(gsub("?", "", names(df)))
   return(df)
 }
 
